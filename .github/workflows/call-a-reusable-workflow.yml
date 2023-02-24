@@ -19,8 +19,8 @@ jobs:
   myjob2:
     uses: jonjozwiak/actions-workflows/.github/workflows/sample-passing-inputs-and-secrets.yml@main
     with:
-      input1: $callingjobinput1
-      input2: $callingjobinput2
+      input1: ${{ env.callingjobinput1 }}
+      input2: ${{ env.callingjobinput2 }}
     secrets:
       mysecret1: ${{ secrets.calling_workflow_secret1 }}
       mysecret2: ${{ secrets.calling_workflow_secret2 }}
