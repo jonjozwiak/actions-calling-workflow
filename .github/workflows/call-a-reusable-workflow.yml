@@ -15,12 +15,18 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Hello world calling workflow
-        run: echo "Hello from calling workflow" 
+        run: |
+          echo "Hello from calling workflow" 
+          echo "Calling job input 1: $callingjobinput1"
+          echo "Calling job input 2: $callingjobinput2"
+        
   myjob2:
     uses: jonjozwiak/actions-workflows/.github/workflows/sample-passing-inputs-and-secrets.yml@main
     with:
-      input1: ${{ env.callingjobinput1 }}
-      input2: ${{ env.callingjobinput2 }}
+      input1: $callingjobinput1
+      input2: $callingjobinput2
     secrets:
       mysecret1: ${{ secrets.calling_workflow_secret1 }}
       mysecret2: ${{ secrets.calling_workflow_secret2 }}
+      # Note you can also use 'secrets: inherit' to pass secrets as is to the reusable workflow
+      # https://docs.github.com/en/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
